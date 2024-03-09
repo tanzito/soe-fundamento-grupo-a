@@ -15,8 +15,8 @@
                             <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Seleccione la
                                 cartera.</h3>
                             <div class="mt-2">
-                                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                                    <table
+                                <div class="relative overflow-x-auto shadow-md sm:rounded-lg tex">
+                                    <table 
                                         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead
                                             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -33,31 +33,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="hover:bg-gray-200" (click)="this.setPortfolio()">
+                                            <tr *ngFor="let portfolio of this.portfolios" class="hover:bg-gray-200"
+                                                (click)="this.setPortfolio(portfolio)">
                                                 <td scope="row" class="px-6 py-4 text-black">
-                                                    1
+                                                    {{portfolio.id}}
                                                 </td>
                                                 <td class="px-6 py-4  text-black">
-                                                    Tarjeta 10
+                                                    {{portfolio.name}}
                                                 </td>
                                                 <td class="px-6 py-4  text-black">
-                                                    Tarjeta para cargar
-                                                </td>
-
-                                            </tr>
-
-                                            <tr class="">
-                                                <td scope="row" class="px-6 py-4 text-black">
-                                                    1
-                                                </td>
-                                                <td class="px-6 py-4  text-black">
-                                                    Tarjeta 20
-                                                </td>
-                                                <td class="px-6 py-4  text-black">
-                                                    Tarjeta para cargar
+                                                    {{portfolio.description}}
                                                 </td>
                                             </tr>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -69,8 +56,16 @@
         </div>
     </div>
 </div>
+<div class="">
+    <button (click)="this.viewPortfolio()"
+        class="bg-do-blue-light rounded-xl px-4 py-2 font-semibold text-white hover:bg-do-blue-medium hover:text-sky-100 active:bg-do-blue-mediumdark active:text-sky-300">
+        Seleccionar Cartera
+    </button>
+</div>
 
-<h2 class="text-4xl font-bold ">Clientes</h2>
+<h2 class="text-4xl font-bold mt-3">Clientes</h2>
+
+
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
 export class ProductRepositoryHttp implements ProductRepository {
     private readonly http: HttpClient = inject(HttpClient);
     constructor() { }
-    findAll(): Product[] {
+    async findAll(): Promise<Product[]> {
         return [{
             id: 1,
             name: 'tarjeta 10',
