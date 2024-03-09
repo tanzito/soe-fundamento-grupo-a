@@ -8,6 +8,7 @@ import { PortfolioRepository } from "../domain/repository/portfolio.repository";
     providedIn: 'root'
 })
 export class PortfolioRepositoryHttp implements PortfolioRepository {
+    
     async findBySeller(sellerId: number): Promise<Portfolio[]> {
         return [
             {

@@ -7,6 +7,7 @@ import { ProductRepositoryHttp } from './feature/infrastructure/product.reposito
 import { PortfolioRepositoryHttp } from './feature/infrastructure/portfolio.repository-http';
 import { ClientRepositoryHttp } from './feature/infrastructure/client.repository-http';
 import { OrderRepositoryHttp } from './feature/infrastructure/order.repository-http';
+import { AuthRepositoryHttp } from './feature/infrastructure/auth.repository-http';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
@@ -25,6 +26,11 @@ export const appConfig: ApplicationConfig = {
   {
     provide: 'ORDER_REPOSITORY',
     useClass: OrderRepositoryHttp
+  },
+
+  {
+    provide: 'AUTH_REPOSITORY',
+    useClass: AuthRepositoryHttp
   },
   provideHttpClient()
 

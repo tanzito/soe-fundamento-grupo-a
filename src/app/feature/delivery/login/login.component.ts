@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthRepository } from '../../domain/repository/auth.repository';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor( private router: Router) {
+  constructor(private router: Router, @Inject('AUTH_REPOSITORY') private readonly authRepository: AuthRepository) {
 
   }
 
-
   login() {
-    this.router.navigate(['/home']);
+    this.authRepository.login().subscribe(x => {
+      if (x) {
+        this.router.navigate(['/home']);
+      }
+
+    });
   }
 }
