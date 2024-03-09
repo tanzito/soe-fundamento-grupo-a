@@ -4,8 +4,8 @@ import { provideHttpClient } from '@angular/common/http'
 
 import { routes } from './app.routes';
 import { ProductRepositoryHttp } from './feature/infrastructure/product.repository-http';
-import { HomeComponent } from './feature/delivery/home/home.component';
 import { PortfolioRepositoryHttp } from './feature/infrastructure/portfolio.repository-http';
+import { ClientRepositoryHttp } from './feature/infrastructure/client.repository-http';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
@@ -16,6 +16,10 @@ export const appConfig: ApplicationConfig = {
   {
     provide: 'PORTFOLIO_REPOSITORY',
     useClass: PortfolioRepositoryHttp
+  },
+  {
+    provide: 'CLIENT_REPOSITORY',
+    useClass: ClientRepositoryHttp
   },
   provideHttpClient()
 

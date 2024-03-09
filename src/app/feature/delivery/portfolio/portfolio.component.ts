@@ -4,6 +4,8 @@ import { PortfolioRepository } from '../../domain/repository/portfolio.repositor
 import { Product } from '../../domain/product';
 import { CommonModule } from '@angular/common';
 import { Portfolio } from '../../domain/portfolio';
+import { ClientRepository } from '../../domain/repository/client.repository';
+import { Client } from '../../domain/client';
 
 @Component({
   selector: 'app-portfolio',
@@ -17,14 +19,17 @@ export class PortfolioComponent implements OnInit {
 
   products: Product[];
   portfolios: Portfolio[];
+  clients: Client[];
   sellerId: number = 1;
 
   constructor(
     @Inject('PRODUCT_REPOSITORY') private readonly productRepository: ProductRepository,
-    @Inject('PORTFOLIO_REPOSITORY') private readonly portfolioRepository: PortfolioRepository
+    @Inject('PORTFOLIO_REPOSITORY') private readonly portfolioRepository: PortfolioRepository,
+    @Inject('CLIENT_REPOSITORY') private readonly clientRepository: ClientRepository,
   ) {
     this.products = [];
     this.portfolios = [];
+    this.clients = [];
 
   }
   classActiveCartera = 'show';
@@ -41,15 +46,16 @@ export class PortfolioComponent implements OnInit {
 
   }
 
-  setPortfolio(portfolio: Portfolio): void {
+  async setPortfolio(portfolio: Portfolio): Promise<void> {
     this.classActiveCartera = 'hidden';
+    this.clients = await this.clientRepository.findByPortfolio(portfolio.id);
   }
 
   viewPortfolio(): void {
     this.classActiveCartera = 'show';
   }
 
-  vender(): void {
+  vender(client: Client): void {
     this.classActiveVenta = 'show';
     // this.cargarProduct
   }
