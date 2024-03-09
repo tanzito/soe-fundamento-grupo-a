@@ -1,3 +1,4 @@
+<h2 class="text-4xl font-bold ">Productos</h2>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -17,35 +18,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr
-                class="">
+            <tr *ngFor="let product of this.products" class="">
                 <td scope="row" class="px-6 py-4 text-black">
-                    1
+                    {{product.id}}
                 </td>
                 <td class="px-6 py-4  text-black">
-                    Tarjeta 10
+                    {{product.name}}
                 </td>
                 <td class="px-6 py-4  text-black">
-                    Tarjeta para cargar
+                    {{product.description}}
                 </td>
                 <td class="px-6 py-4  text-black">
-                    $2999
-                </td>
-            </tr>
-
-            <tr
-                class="">
-                <td scope="row" class="px-6 py-4 text-black">
-                    1
-                </td>
-                <td class="px-6 py-4  text-black">
-                    Tarjeta 20
-                </td>
-                <td class="px-6 py-4  text-black">
-                    Tarjeta para cargar
-                </td>
-                <td class="px-6 py-4  text-black">
-                    $2999
+                    {{product.price}}
                 </td>
             </tr>
 
