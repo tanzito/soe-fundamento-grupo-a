@@ -1,6 +1,6 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProductRepository } from './feature/domain/product.repository';
+import { ProductRepository } from './feature/domain/repository/product.repository';
 import { Product } from './feature/domain/product';
 import { ProductRepositoryHttp } from './feature/infrastructure/product.repository-http';
 @Component({

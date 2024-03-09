@@ -1,5 +1,5 @@
 import { Inject, Injectable, inject } from "@angular/core";
-import { ProductRepository } from "../domain/product.repository";
+import { ProductRepository } from "../domain/repository/product.repository";
 import { Product } from "../domain/product";
 import { HttpClient } from "@angular/common/http";
 

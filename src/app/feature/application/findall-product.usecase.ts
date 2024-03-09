@@ -1,6 +1,6 @@
 import { Command } from "../../core/use-case/command";
 import { Product } from "../domain/product";
-import { ProductRepository } from "../domain/product.repository";
+import { ProductRepository } from "../domain/repository/product.repository";
 
 export class FindAllProductUseCase extends Command<void, Product[]>{
     constructor(private readonly productRepository: ProductRepository) {
