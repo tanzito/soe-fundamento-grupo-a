@@ -9,11 +9,12 @@ import { Client } from '../../domain/client';
 import { Order } from '../../domain/order';
 import { OrderItem } from '../../domain/order-item';
 import { OrderRepository } from '../../domain/repository/order.repository';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.css',
 })
@@ -26,10 +27,12 @@ export class PortfolioComponent implements OnInit {
   products: Product[];
   portfolios: Portfolio[];
   clients: Client[];
-  sellerId: number = 1;
+  sellerId: number;
 
   portfolioSelect: Portfolio | null;
   clientSelect: Client | null;
+
+  detalle: FormControl;
 
 
   constructor(
@@ -44,6 +47,8 @@ export class PortfolioComponent implements OnInit {
     this.order = null;
     this.portfolioSelect = null;
     this.clientSelect = null;
+    this.sellerId = JSON.parse(localStorage.getItem('seller')!).id;
+    this.detalle = new FormControl();
   }
 
 
@@ -56,6 +61,10 @@ export class PortfolioComponent implements OnInit {
       this.portfolios = r;
     });
 
+  }
+
+  cancelPortfolio(): void {
+    this.classActiveCartera = 'hidden';
   }
 
   async setPortfolio(portfolio: Portfolio): Promise<void> {
@@ -75,9 +84,10 @@ export class PortfolioComponent implements OnInit {
       portfolioId: this.portfolioSelect?.id,
       orderItem: this.getOrderItem(),
       total: 0,
-      selletId: this.sellerId
+      selletId: this.sellerId,
+      description: ''
     };
-    console.log('hola')
+    this.detalle = new FormControl();
     this.classActiveVenta = 'show';
   }
   getOrderItem(): OrderItem[] {
@@ -111,6 +121,7 @@ export class PortfolioComponent implements OnInit {
   }
 
   saveOrder(): void {
+    this.order!.description = this.detalle.value;
     this.classActiveVenta = 'hidden';
     if (this.order != null) {
       this.orderRepository.save(this.order);

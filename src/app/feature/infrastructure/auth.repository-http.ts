@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { AuthRepository } from '../domain/repository/auth.repository';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
+import { Seller } from '../domain/seller';
+import { Login } from '../domain/login';
 
 
 @Injectable({
@@ -10,9 +12,7 @@ import { Observable } from 'rxjs';
 export class AuthRepositoryHttp implements AuthRepository {
 
     private readonly http: HttpClient = inject(HttpClient);
-    // http://localhost:8000/
-
-    login(): Observable<HttpResponse<any>> {
+    login(login: Login): Promise<Seller> {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -22,10 +22,10 @@ export class AuthRepositoryHttp implements AuthRepository {
         };
 
         const json = JSON.stringify({
-            user: "jterrazas",
-            password: "123456789"
+            user: login.email,
+            password: login.password
         });
-        return this.http.post<HttpResponse<any>>('http://localhost:8000/auth/login', json, httpOptions);
+        return lastValueFrom(this.http.post<Seller>('http://localhost:8000/auth/login', json, httpOptions));
     }
 
 }

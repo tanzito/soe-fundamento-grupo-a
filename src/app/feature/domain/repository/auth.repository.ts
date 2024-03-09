@@ -1,6 +1,7 @@
-import { HttpResponse } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Login } from "../login";
+import { Seller } from "../seller";
+
 
 export interface AuthRepository {
-    login(): Observable<HttpResponse<any>> ;
+    login(login: Login): Promise<Seller>;
 }

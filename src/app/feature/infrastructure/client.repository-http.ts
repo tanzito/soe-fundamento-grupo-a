@@ -1,33 +1,27 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Client } from "../domain/client";
 import { ClientRepository } from "../domain/repository/client.repository";
+import { HttpClient } from "@angular/common/http";
+import { ClientDto } from "./dto/client.dto";
+import { lastValueFrom } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ClientRepositoryHttp implements ClientRepository {
 
+    private readonly http: HttpClient = inject(HttpClient);
+
     async findByPortfolio(portfolioId: number): Promise<Client[]> {
-        return [
-            {
-                id: 1,
-                name: 'jonatan',
-                lastname: 'terrazas',
-                address: 'cuchilla'
-            },
-            {
-                id: 2,
-                name: 'gustavo',
-                lastname: 'cabrera',
-                address: 'camiri calle 4'
-            }
-            , {
-                id: 3,
-                name: 'ivan',
-                lastname: 'castillo',
-                address: 'mairana calle 5'
-            }
-        ]
+
+        const responde = await lastValueFrom(this.http.get<ClientDto[]>(`http://localhost:8000/cliente/ruta/${portfolioId}`));
+
+        return responde.map(x => ({
+            id: x.id,
+            name: x.nombre,
+            lastname: x.apellido,
+            address: x.apellido
+        }));
     }
 
 }

@@ -6,4 +6,5 @@ export interface Order {
     portfolioId?: number;
     orderItem: OrderItem[];
     total: number;
+    description: string;
 }

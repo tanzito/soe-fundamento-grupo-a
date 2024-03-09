@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Seller } from '../../domain/seller';
 
 @Component({
   selector: 'app-seller',
@@ -9,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class SellerComponent {
 
+  seller: Seller;
+  constructor() {
+    this.seller = JSON.parse(localStorage.getItem('seller')!);
+  }
 }
