@@ -6,6 +6,7 @@ import { routes } from './app.routes';
 import { ProductRepositoryHttp } from './feature/infrastructure/product.repository-http';
 import { PortfolioRepositoryHttp } from './feature/infrastructure/portfolio.repository-http';
 import { ClientRepositoryHttp } from './feature/infrastructure/client.repository-http';
+import { OrderRepositoryHttp } from './feature/infrastructure/order.repository-http';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
@@ -20,6 +21,10 @@ export const appConfig: ApplicationConfig = {
   {
     provide: 'CLIENT_REPOSITORY',
     useClass: ClientRepositoryHttp
+  },
+  {
+    provide: 'ORDER_REPOSITORY',
+    useClass: OrderRepositoryHttp
   },
   provideHttpClient()
 
