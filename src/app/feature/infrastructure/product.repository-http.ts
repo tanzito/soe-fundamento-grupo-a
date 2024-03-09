@@ -15,7 +15,15 @@ export class ProductRepositoryHttp implements ProductRepository {
             name: 'tarjeta 10',
             description: 'tarjeta con credito de 10',
             price: 9
-        }];
+        },
+        {
+            id: 2,
+            name: 'tarjeta 20',
+            description: 'tarjeta con credito de 20',
+            price: 18
+        }
+        ]
     }
+
 
 }
